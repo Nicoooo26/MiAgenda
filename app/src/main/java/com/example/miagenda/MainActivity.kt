@@ -21,6 +21,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var rvListadoContactos: RecyclerView
     lateinit var fabAddContact: FloatingActionButton
 
+    lateinit var adapter: ContactosAdapter
     lateinit var btnCheck: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,9 +42,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initUi() {
-        val contactosAdapter = ContactosAdapter(contactos)
+        this.adapter = ContactosAdapter(contactos)
         rvListadoContactos.layoutManager = LinearLayoutManager(this)
-        rvListadoContactos.adapter = contactosAdapter
+        rvListadoContactos.adapter = this.adapter
     }
 
     private fun initListeners() {
@@ -58,6 +59,7 @@ class MainActivity : AppCompatActivity() {
                     cts.esCorrecto=false
                 }
             }
+            adapter.notifyDataSetChanged()
         }
     }
 }
